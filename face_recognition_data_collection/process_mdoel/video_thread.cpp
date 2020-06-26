@@ -42,7 +42,7 @@ void VideoThread::run()
 
     /*加载人像识别模型*/
     CascadeClassifier haar_cascade;
-    haar_cascade.load("C:/Users/houxia2x/Desktop/Asa/opencv/project/FRDC/face_recognition_data_collection/resource/recg_model_file/haarcascade_frontalface_alt_tree.xml");
+    haar_cascade.load("D:/FRDC/face_recognition_data_collection/resource/recg_model_file/haarcascade_frontalface_alt_tree.xml");
     qDebug()<<"load haar model";
 
     size_t wid = video_label_handle->width();
@@ -50,21 +50,33 @@ void VideoThread::run()
     qDebug()<<"video_label_handle wid is : "<<wid;
     qDebug()<<"video_label_handle hei is : "<<hei;
 
-
     Mat src_image;
     while (cap.read(src_image)) {
         /*旋转成像*/
         flip(src_image,src_image,1);
+
+        /*获取人脸区域并画框显示*/
         Mat gray_image;
         vector<Rect> vec_faces;
         cvtColor(src_image,gray_image,COLOR_BGR2GRAY);
         haar_cascade.detectMultiScale(gray_image,vec_faces);
-        for(size_t var = 0 ; var < vec_faces.size() ; ++var)
+        if(vec_faces.size() != 0)
         {
-            Rect face_tmp = vec_faces[var];
-            rectangle(src_image,face_tmp,Scalar(0,0,255),2,8,0);
-            resize(src_image,src_image,Size(wid,hei),1.0,1.0,INTER_CUBIC);
+            for(size_t var = 0 ; var < vec_faces.size() ; ++var)
+            {
+                Rect face_tmp = vec_faces[var];
+                rectangle(src_image,face_tmp,Scalar(0,0,255),3,8,0);
+                qDebug()<<"x is : "<<face_tmp.x;
+                qDebug()<<"y is : "<<face_tmp.y;
+                qDebug()<<"wid is : "<<face_tmp.width;
+                qDebug()<<"hei is : "<<face_tmp.height;
+            }
+        }else{
+            Rect rect_normal(235,160,150,160);
+            rectangle(src_image,rect_normal,Scalar(0,0,255),3,8,0);
         }
+
+        /*转化Mat卫QImage*/
         cvtColor(src_image,src_image,COLOR_BGR2RGB);
         QImage video_image((const unsigned char *)src_image.data,\
                            src_image.cols,\
@@ -72,6 +84,6 @@ void VideoThread::run()
                            src_image.step,\
                            QImage::Format_RGB888);
         video_label_handle->setPixmap(QPixmap::fromImage(video_image));
-        waitKey(20);
+        waitKey(10);
     }
 }

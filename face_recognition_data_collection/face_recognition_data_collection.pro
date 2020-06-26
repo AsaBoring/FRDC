@@ -27,21 +27,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-#INCLUDEPATH += C:\Users\houxia2x\Desktop\Asa\opencv\asa_build\install\include\opencv2\
-#               C:\Users\houxia2x\Desktop\Asa\opencv\asa_build\install\include
-#LIBS += -LC:\Users\houxia2x\Desktop\Asa\opencv\asa_build\install\x64\mingw\bin\
-#        -llibopencv_world430
-
-#INCLUDEPATH += $$PWD/../lib/opencv/include/opencv2\
-#               $$PWD/../lib/opencv/include/
-#LIBS += -L$$PWD/../lib/opencv/\
-#        -llibopencv_world430
-
-
-INCLUDEPATH += C:\Users\houxia2x\Desktop\Asa\opencv\libcontrib\include\opencv2\
-               C:\Users\houxia2x\Desktop\Asa\opencv\lib\contrib\include
-
-LIBS += -LC:\Users\houxia2x\Desktop\Asa\opencv\lib\contrib\
+INCLUDEPATH += $$PWD/../lib/opencv/include/opencv2\
+               $$PWD/../lib/opencv/include/
+LIBS += -L$$PWD/../lib/opencv \
         -llibopencv_world430
 
 INCLUDEPATH += $$PWD/process_mdoel

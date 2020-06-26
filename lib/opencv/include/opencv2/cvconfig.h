@@ -123,7 +123,7 @@
 /* #undef HAVE_PTHREADS_PF */
 
 /* Qt support */
-#define HAVE_QT
+/* #undef HAVE_QT */
 
 /* Qt OpenGL support */
 /* #undef HAVE_QT_OPENGL */
