@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/recg_model_file/haarcascade_frontalface_alt_tree.xml</file>
+    </qresource>
+</RCC>
