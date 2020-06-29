@@ -40,9 +40,11 @@ void VideoThread::run()
         return;
     }
 
-    /*加载人像识别模型*/
+    /*加载人像识别模型(haar人脸模型文件放在相对位置中，如改变该文件位置需注意修改haar_path)*/
     CascadeClassifier haar_cascade;
-    haar_cascade.load("D:/FRDC/face_recognition_data_collection/resource/recg_model_file/haarcascade_frontalface_alt_tree.xml");
+    QString current_path = QDir::currentPath();
+    QString haar_path = current_path + "/../face_recognition_data_collection/resource/recg_model_file/haarcascade_frontalface_alt_tree.xml";
+    haar_cascade.load(haar_path.toUtf8().constData());
     qDebug()<<"load haar model";
 
     size_t wid = video_label_handle->width();
