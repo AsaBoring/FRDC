@@ -1,6 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <QDir>
 #include <QFrame>
 #include <QLabel>
 #include <QDebug>
